@@ -1,4 +1,4 @@
-import 'package:bettery_health/counter/counter.dart';
+import 'package:bettery_health/battery_heath/pages/battery_health_page.dart';
 import 'package:bettery_health/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const BatteryHealthPage(),
     );
   }
 }

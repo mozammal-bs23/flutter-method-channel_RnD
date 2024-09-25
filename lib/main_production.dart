@@ -1,6 +1,6 @@
 import 'package:bettery_health/app/app.dart';
-import 'package:bettery_health/bootstrap.dart';
+import 'package:flutter/material.dart';
 
-void main() {
-  bootstrap(() => const App());
+void main() async {
+  runApp(const App());
 }
