@@ -29,13 +29,13 @@ class MainActivity: FlutterActivity() {
                         if (batteryPct != null) {
                             result.success(batteryPct)
                         } else {
-                            result.error("UNAVAILABLE", "Battery level not available")
+                            result.error("UNAVAILABLE", "Battery level not available", null)
                         }
                     } catch (e: Exception) {
-                        result.error("UNAVAILABLE", "Battery level not available")
+                        result.error("UNAVAILABLE", "Battery level not available",null)
                     }
                 } else {
-                    result.error("UNAVAILABLE", "No such method")
+                    result.error("UNAVAILABLE", "No such method",null)
                 }
             }
         }

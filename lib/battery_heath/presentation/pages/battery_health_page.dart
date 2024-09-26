@@ -19,62 +19,67 @@ class _BatteryHealthPageState extends State<BatteryHealthPage> {
       appBar: AppBar(
         title: const Text('Battery Health'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Icon(
-              _getIcon(batteryHealthProvider.value),
-              size: 300,
-              color: _getColor(batteryHealthProvider.value),
-            ),
-          ),
-          Text(
-            _getText(batteryHealthProvider.value),
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Center(
+                child: Icon(
+                  _getIcon(batteryHealthProvider.value),
+                  size: MediaQuery.of(context).size.height * .2,
                   color: _getColor(batteryHealthProvider.value),
                 ),
-          ),
-          TextButton(
-            onPressed: () async {
-              try {
-                final result = await platform.invokeMethod('getBatteryLevel');
-
-                if (result.runtimeType != double) {
-                  throw Exception(result);
-                }
-
-                final percentage = result as double;
-
-                _showSnackBar(
-                  context,
-                  'Battery level: $percentage%',
-                  Colors.green,
-                );
-
-                updateBatteryHealth(percentage);
-              } catch (e) {
-                final error = e as PlatformException;
-                _showSnackBar(context, error.message!, Colors.red);
-              }
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.blue,
               ),
-              padding: const EdgeInsets.all(16),
-              child: const Text(
-                'Get Battery Health',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Text(
+                _getText(batteryHealthProvider.value),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: _getColor(batteryHealthProvider.value),
+                    ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  try {
+                    final result =
+                        await platform.invokeMethod('getBatteryLevel');
+
+                    if (result.runtimeType != double) {
+                      throw Exception(result);
+                    }
+
+                    final percentage = result as double;
+
+                    _showSnackBar(
+                      context,
+                      'Battery level: $percentage%',
+                      Colors.green,
+                    );
+
+                    updateBatteryHealth(percentage);
+                    setState(() {});
+                  } catch (e) {
+                    final error = e as PlatformException;
+                    _showSnackBar(context, error.message!, Colors.red);
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.blue,
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: const Text(
+                    'Get Battery Health',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
