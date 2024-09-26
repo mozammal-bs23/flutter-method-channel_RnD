@@ -10,9 +10,9 @@ enum BatteryHealth {
 final batteryHealthProvider = ValueNotifier<BatteryHealth>(BatteryHealth.good);
 
 void updateBatteryHealth(double percentage) {
-  if (percentage == 0) {
+  if (percentage <= 10) {
     batteryHealthProvider.value = BatteryHealth.emergency;
-  } else if (percentage <= 10) {
+  } else if (percentage < 20) {
     batteryHealthProvider.value = BatteryHealth.poor;
   } else if (percentage < 90) {
     batteryHealthProvider.value = BatteryHealth.good;
