@@ -31,7 +31,7 @@ import Flutter
       let batteryLevel = UIDevice.current.batteryLevel
 
       if batteryLevel >= 0 {
-          result(Int(batteryLevel * 100)) // Convert to percentage
+          result(Float(batteryLevel * 100)) // Convert to percentage
       } else {
           result(FlutterError(code: "UNAVAILABLE", message: "Battery level not available", details: nil))
       }

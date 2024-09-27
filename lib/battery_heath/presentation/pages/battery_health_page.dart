@@ -57,8 +57,8 @@ class _BatteryHealthPageState extends State<BatteryHealthPage> {
                     updateBatteryHealth(percentage);
                     setState(() {});
                   } catch (e) {
-                    final error = e as PlatformException;
-                    _showSnackBar(context, error.message!, Colors.red);
+                    // final error = e as PlatformException;
+                    _showSnackBar(context, e.toString(), Colors.red);
                   }
                 },
                 child: Container(
